@@ -1,0 +1,617 @@
+{
+    "data": {
+        "type": "records",
+        "id": "22980",
+        "attributes": {
+            "description": null,
+            "title": "Test External PO 1011.1",
+            "module": "Workflow",
+            "date_created": "2025-11-10T19:19:42+00:00",
+            "date_updated": "2025-11-13T17:00:08+00:00",
+            "pkey": "BTPO-000299",
+            "doc_version": "",
+            "course_version": "",
+            "link_id": null,
+            "cf_address_country": "USA",
+            "cf_address_zip": "61002",
+            "cf_address_state": "Illinois",
+            "cf_address_city": "Niles",
+            "attachment": "a8676f94-d736-413d-abff-9c3d1203c805",
+            "cf_reason_for_cancel": "trst",
+            "cf_department_head": 200,
+            "cf_department_btop": 2620,
+            "cf_client": 196,
+            "cf_contact_person_info": "N/A",
+            "cf_address_of_supplier": "2850 Centerville Road",
+            "cf_supplier_state": "DE",
+            "cf_supplier_city": "Wilmington",
+            "cf_supplier_zip": "19808-1610",
+            "cf_billing_address": "700 Corporate Center Drive",
+            "cf_bill_to_city": "Pomona",
+            "cf_bill_to_state": "CA",
+            "cf_bill_to_zip": "91768",
+            "cf_shipping_address": "5501 Research Park Boulevard",
+            "cf_ship_to_city": "Madison",
+            "cf_ship_to_state": "WI",
+            "cf_ship_to_zip": "53719",
+            "cf_supplier_country": "United States of America",
+            "cf_bill_to_country": "USA",
+            "cf_ship_to_country": "United States of America",
+            "cf_handling_fee_of": "10.00",
+            "cf_supplier_company_nam": 973,
+            "cf_receiving_company": 966,
+            "cf_bill_to_company": 2701,
+            "cf_description_of_item": "test",
+            "cf_project_code": "DRBCN",
+            "cf_payment_terms": "Paid upon order",
+            "cf_project_manager": 188,
+            "cf_invoice_payment_term": "60 days NET",
+            "cf_project_psc": 1065,
+            "cf_reason_justification": "test",
+            "cf_quote_number": "test",
+            "cf_requisitioner": 240,
+            "cf_accounting_personnel": [
+                188
+            ],
+            "cf_method_of_payment": "Credit Card",
+            "cf_subtotal_external": "2146.57",
+            "cf_tax_external": "11.87",
+            "cf_shipping_n_handling_external": "5.69",
+            "cf_others_external": "0.00",
+            "cf_handling_fee_client": "0.1",
+            "cf_po_number": "AB-7865887",
+            "cf_received_by": 188,
+            "cf_var_poreq": 0,
+            "cf_client_record_proposal": 14277,
+            "cf_po_type": "External",
+            "cf_client_address_crm": "5000 w Howard St.",
+            "cf_invoice_to_client": 15355,
+            "cf_date_client_invoice": "2025-11-11T00:00:00+00:00",
+            "cf_due_date_client_invoice": "2025-12-11T00:00:00+00:00",
+            "cf_total_btpo": 2148.63,
+            "cf_total_w_handlingfe": 2362.306,
+            "cf_po_amount_ur_ext": "2361.31",
+            "cf_amount_remaining_ext": "0.996",
+            "cf_item_list_receive": "[{\"name\":\"a8b5b734-f3f5-42e2-92e1-5c3f5196b84d\",\"values\":{\"cf_receiving_confirm\":\"10\",\"cf_remarks_comments\":\"\"}}]",
+            "cf_receiving_complete_btpo": "Yes",
+            "cf_items_btpo_api2": "[{\"name\":\"323a9041-5fcb-4268-a539-ea86b03fa2b8\",\"values\":{\"cf_item_desc_ext\":\"Item 1\",\"cf_item_part_num_ext\":\"\",\"cf_order_qty_ext\":\"10\",\"cf_uom_ext\":\"ea\",\"cf_price_per_unit_ext\":\"98.59\",\"cf_dollar_amount_external\":\"\"}},{\"name\":\"8e83a032-62bd-45a7-bcc5-3f5ba01d7f43\",\"values\":{\"cf_item_desc_ext\":\"Item 2\",\"cf_item_part_num_ext\":\"15811\",\"cf_order_qty_ext\":\"10\",\"cf_uom_ext\":\"pcs\",\"cf_price_per_unit_ext\":\"78.18\",\"cf_dollar_amount_external\":\"\"}},{\"name\":\"8177cf9e-5b6d-4ad4-9775-7677d15b24cf\",\"values\":{\"cf_item_desc_ext\":\"Item 3\",\"cf_item_part_num_ext\":\"15796\",\"cf_order_qty_ext\":\"1\",\"cf_uom_ext\":\"box\",\"cf_price_per_unit_ext\":\"378.77\",\"cf_dollar_amount_external\":\"\"}}]",
+            "cf_additional_handling_ext": 213.676,
+            "cf_discount_ext": "15.50"
+        },
+        "meta": {
+            "cf_address_country": {
+                "type": "custom-fields",
+                "id": "-37",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Country"
+                }
+            },
+            "cf_address_zip": {
+                "type": "custom-fields",
+                "id": "-36",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "ZIP"
+                }
+            },
+            "cf_address_state": {
+                "type": "custom-fields",
+                "id": "-35",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "State/Province/Region"
+                }
+            },
+            "cf_address_city": {
+                "type": "custom-fields",
+                "id": "-34",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "City"
+                }
+            },
+            "attachment": {
+                "type": "custom-fields",
+                "id": "-23",
+                "attributes": {
+                    "fieldType": "attachment",
+                    "label": "Attachment(s)"
+                }
+            },
+            "cf_reason_for_cancel": {
+                "type": "custom-fields",
+                "id": "127",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Reason for Cancellation"
+                }
+            },
+            "cf_department_head": {
+                "type": "custom-fields",
+                "id": "137",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Department Head"
+                }
+            },
+            "cf_department_btop": {
+                "type": "custom-fields",
+                "id": "138",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Department"
+                }
+            },
+            "cf_client": {
+                "type": "custom-fields",
+                "id": "277",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Client Permissions"
+                }
+            },
+            "cf_contact_person_info": {
+                "type": "custom-fields",
+                "id": "342",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Contact Person Information"
+                }
+            },
+            "cf_address_of_supplier": {
+                "type": "custom-fields",
+                "id": "375",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Address of Supplier"
+                }
+            },
+            "cf_supplier_state": {
+                "type": "custom-fields",
+                "id": "376",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier State"
+                }
+            },
+            "cf_supplier_city": {
+                "type": "custom-fields",
+                "id": "377",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier City"
+                }
+            },
+            "cf_supplier_zip": {
+                "type": "custom-fields",
+                "id": "378",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier ZIP"
+                }
+            },
+            "cf_billing_address": {
+                "type": "custom-fields",
+                "id": "380",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Billing Address"
+                }
+            },
+            "cf_bill_to_city": {
+                "type": "custom-fields",
+                "id": "381",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: City"
+                }
+            },
+            "cf_bill_to_state": {
+                "type": "custom-fields",
+                "id": "382",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: State"
+                }
+            },
+            "cf_bill_to_zip": {
+                "type": "custom-fields",
+                "id": "383",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: Zip"
+                }
+            },
+            "cf_shipping_address": {
+                "type": "custom-fields",
+                "id": "385",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Shipping Address"
+                }
+            },
+            "cf_ship_to_city": {
+                "type": "custom-fields",
+                "id": "386",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: City"
+                }
+            },
+            "cf_ship_to_state": {
+                "type": "custom-fields",
+                "id": "387",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: State"
+                }
+            },
+            "cf_ship_to_zip": {
+                "type": "custom-fields",
+                "id": "388",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: Zip"
+                }
+            },
+            "cf_supplier_country": {
+                "type": "custom-fields",
+                "id": "389",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier Country"
+                }
+            },
+            "cf_bill_to_country": {
+                "type": "custom-fields",
+                "id": "390",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: Country"
+                }
+            },
+            "cf_ship_to_country": {
+                "type": "custom-fields",
+                "id": "391",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: Country"
+                }
+            },
+            "cf_handling_fee_of": {
+                "type": "custom-fields",
+                "id": "399",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Handling Fee"
+                }
+            },
+            "cf_supplier_company_nam": {
+                "type": "custom-fields",
+                "id": "406",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Supplier Company Name"
+                }
+            },
+            "cf_receiving_company": {
+                "type": "custom-fields",
+                "id": "409",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Receiving Company"
+                }
+            },
+            "cf_bill_to_company": {
+                "type": "custom-fields",
+                "id": "410",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Bill To: Company"
+                }
+            },
+            "cf_description_of_item": {
+                "type": "custom-fields",
+                "id": "413",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Description"
+                }
+            },
+            "cf_project_code": {
+                "type": "custom-fields",
+                "id": "416",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Project Code"
+                }
+            },
+            "cf_payment_terms": {
+                "type": "custom-fields",
+                "id": "420",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Payment Terms"
+                }
+            },
+            "cf_project_manager": {
+                "type": "custom-fields",
+                "id": "439",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Project Manager"
+                }
+            },
+            "cf_invoice_payment_term": {
+                "type": "custom-fields",
+                "id": "444",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Client/Customer Payment Terms   "
+                }
+            },
+            "cf_project_psc": {
+                "type": "custom-fields",
+                "id": "448",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Project"
+                }
+            },
+            "cf_reason_justification": {
+                "type": "custom-fields",
+                "id": "1070",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Reason/Justification"
+                }
+            },
+            "cf_quote_number": {
+                "type": "custom-fields",
+                "id": "1202",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Quote/Proposal Number"
+                }
+            },
+            "cf_requisitioner": {
+                "type": "custom-fields",
+                "id": "1477",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Requisitioner"
+                }
+            },
+            "cf_accounting_personnel": {
+                "type": "custom-fields",
+                "id": "1505",
+                "attributes": {
+                    "fieldType": "multiPicker",
+                    "label": "Accounting Personnel"
+                }
+            },
+            "cf_method_of_payment": {
+                "type": "custom-fields",
+                "id": "2082",
+                "attributes": {
+                    "fieldType": "radioButtonList",
+                    "label": "Method of Payment"
+                }
+            },
+            "cf_subtotal_external": {
+                "type": "custom-fields",
+                "id": "2085",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Subtotal"
+                }
+            },
+            "cf_tax_external": {
+                "type": "custom-fields",
+                "id": "2086",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Tax"
+                }
+            },
+            "cf_shipping_n_handling_external": {
+                "type": "custom-fields",
+                "id": "2087",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Shipping & Handling"
+                }
+            },
+            "cf_others_external": {
+                "type": "custom-fields",
+                "id": "2088",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Others"
+                }
+            },
+            "cf_handling_fee_client": {
+                "type": "custom-fields",
+                "id": "2089",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Handling Fee"
+                }
+            },
+            "cf_po_number": {
+                "type": "custom-fields",
+                "id": "2420",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "PO #"
+                }
+            },
+            "cf_received_by": {
+                "type": "custom-fields",
+                "id": "2816",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Received By"
+                }
+            },
+            "cf_var_poreq": {
+                "type": "custom-fields",
+                "id": "4395",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Vendor Audit Record"
+                }
+            },
+            "cf_client_record_proposal": {
+                "type": "custom-fields",
+                "id": "4690",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Client Record "
+                }
+            },
+            "cf_po_type": {
+                "type": "custom-fields",
+                "id": "4700",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "PO Type"
+                }
+            },
+            "cf_client_address_crm": {
+                "type": "custom-fields",
+                "id": "4740",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Address"
+                }
+            },
+            "cf_invoice_to_client": {
+                "type": "custom-fields",
+                "id": "5541",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Customer Purchase Order Record"
+                }
+            },
+            "cf_date_client_invoice": {
+                "type": "custom-fields",
+                "id": "5542",
+                "attributes": {
+                    "fieldType": "datepicker",
+                    "label": "Date of Invoice"
+                }
+            },
+            "cf_due_date_client_invoice": {
+                "type": "custom-fields",
+                "id": "5543",
+                "attributes": {
+                    "fieldType": "datepicker",
+                    "label": "Invoice Due Date"
+                }
+            },
+            "cf_total_btpo": {
+                "type": "custom-fields",
+                "id": "5544",
+                "attributes": {
+                    "fieldType": "variable",
+                    "label": "Total"
+                }
+            },
+            "cf_total_w_handlingfe": {
+                "type": "custom-fields",
+                "id": "5545",
+                "attributes": {
+                    "fieldType": "variable",
+                    "label": "Client Total Amount Due (includes Handling Fee) "
+                }
+            },
+            "cf_po_amount_ur_ext": {
+                "type": "custom-fields",
+                "id": "5582",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "PO Amount Used/Received"
+                }
+            },
+            "cf_amount_remaining_ext": {
+                "type": "custom-fields",
+                "id": "5583",
+                "attributes": {
+                    "fieldType": "variable",
+                    "label": "Amount Remaining"
+                }
+            },
+            "cf_item_list_receive": {
+                "type": "custom-fields",
+                "id": "5636",
+                "attributes": {
+                    "fieldType": "table",
+                    "label": "Item(s) Received"
+                }
+            },
+            "cf_receiving_complete_btpo": {
+                "type": "custom-fields",
+                "id": "5637",
+                "attributes": {
+                    "fieldType": "select",
+                    "label": "I hereby confirm that all items are received in good condition as acceptable, and with the correct quantity, description, and in accordance with the required specifications."
+                }
+            },
+            "cf_items_btpo_api2": {
+                "type": "custom-fields",
+                "id": "5640",
+                "attributes": {
+                    "fieldType": "table",
+                    "label": "Items"
+                }
+            },
+            "cf_additional_handling_ext": {
+                "type": "custom-fields",
+                "id": "5642",
+                "attributes": {
+                    "fieldType": "variable",
+                    "label": "Additional Handling Fee"
+                }
+            },
+            "cf_discount_ext": {
+                "type": "custom-fields",
+                "id": "5667",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Price discount, vouchers, and other deductible charges"
+                }
+            }
+        },
+        "links": {
+            "self": "/gateway/v2/records/22980"
+        },
+        "relationships": {
+            "initiator": {
+                "data": {
+                    "id": 188,
+                    "type": "users"
+                }
+            },
+            "project": {
+                "data": {
+                    "id": 40,
+                    "type": "projects"
+                }
+            },
+            "type": {
+                "data": {
+                    "id": 204,
+                    "type": "record-types"
+                }
+            },
+            "status": {
+                "data": {
+                    "id": 43474,
+                    "type": "workflow-steps"
+                }
+            }
+        }
+    }
+}

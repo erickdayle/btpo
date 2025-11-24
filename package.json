@@ -1,0 +1,16 @@
+{
+  "name": "btpo",
+  "version": "1.0.0",
+  "description": "Webhook to calculate PO Internal and External totals",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "dotenv": "^16.6.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

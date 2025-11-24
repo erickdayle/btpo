@@ -1,0 +1,435 @@
+{
+    "data": {
+        "type": "records",
+        "id": "22982",
+        "attributes": {
+            "description": null,
+            "title": "Test Internal PO",
+            "module": "Workflow",
+            "date_created": "2025-11-11T19:14:47+00:00",
+            "date_updated": "2025-11-13T16:59:38+00:00",
+            "pkey": "BTPO-000300",
+            "doc_version": "",
+            "course_version": "",
+            "link_id": null,
+            "attachment": "e978cb5a-1b79-4e8f-b138-1d36edbe4436",
+            "cf_reason": "test",
+            "cf_department_head": 188,
+            "cf_department_btop": 4807,
+            "cf_contact_person_info": "Allan Bryce\r\n+256 3669 20115\r\nallanb@testemail.com",
+            "cf_address_of_supplier": "G2 Automated Technologies, LLC.",
+            "cf_supplier_state": "Texas",
+            "cf_supplier_city": "Dallas",
+            "cf_supplier_zip": "75243-5524",
+            "cf_billing_address": "700 Corporate Center Drive",
+            "cf_bill_to_city": "Pomona",
+            "cf_bill_to_state": "CA",
+            "cf_bill_to_zip": "91768",
+            "cf_shipping_address": "5501 Research Park Boulevard",
+            "cf_ship_to_city": "Madison",
+            "cf_ship_to_state": "WI",
+            "cf_ship_to_zip": "53719",
+            "cf_supplier_country": "United States of America",
+            "cf_bill_to_country": "USA",
+            "cf_ship_to_country": "United States of America",
+            "cf_supplier_company_nam": 968,
+            "cf_receiving_company": 966,
+            "cf_bill_to_company": 2701,
+            "cf_description_of_item": "test",
+            "cf_project_code": "BT4.0",
+            "cf_payment_terms": "Paid upon order",
+            "cf_subtotal_n": "0.00",
+            "cf_tax_c": "20.63",
+            "cf_shipping_n_handling_c": "15.24",
+            "cf_others_c": "0.00",
+            "cf_project_psc": 1032,
+            "cf_total_ca": 25.37,
+            "cf_quote_number": "test",
+            "cf_requisitioner": 188,
+            "cf_method_of_payment": "Credit Card",
+            "cf_method_of_payment_no": "test",
+            "cf_po_amount_used_recei": "0.00",
+            "cf_amount_remaining_calc": "25.37",
+            "cf_var_poreq": 22469,
+            "cf_other_contact": "Shantelle Cruz\r\n+256 3676 20555\r\nshantellec@testemail.com",
+            "cf_po_type": "Internal",
+            "cf_items_btpo": "[{\"name\":\"cb73035c-d87e-411e-8694-3003387aa145\",\"values\":{\"cf_item_desc_int\":\"Item 1\",\"cf_item_part_num_int\":\"\",\"cf_order_qty_int\":\"10\",\"cf_uom_int\":\"pcs\",\"cf_price_per_unit_int\":\"45.69\",\"cf_dollar_amount_internal\":\"\"}},{\"name\":\"f60a63c8-e8b5-4de4-9629-4d7438fb746d\",\"values\":{\"cf_item_desc_int\":\"Item 2\",\"cf_item_part_num_int\":\"\",\"cf_order_qty_int\":\"1\",\"cf_uom_int\":\"ea\",\"cf_price_per_unit_int\":\"698.11\",\"cf_dollar_amount_internal\":\"\"}},{\"name\":\"f586bcfc-4991-423b-99de-e5024110855b\",\"values\":{\"cf_item_desc_int\":\"Item 3\",\"cf_item_part_num_int\":\"\",\"cf_order_qty_int\":\"1\",\"cf_uom_int\":\"box\",\"cf_price_per_unit_int\":\"155.60\",\"cf_dollar_amount_internal\":\"\"}}]",
+            "cf_discount_int": "10.50"
+        },
+        "meta": {
+            "attachment": {
+                "type": "custom-fields",
+                "id": "-23",
+                "attributes": {
+                    "fieldType": "attachment",
+                    "label": "Attachment(s)"
+                }
+            },
+            "cf_reason": {
+                "type": "custom-fields",
+                "id": "128",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Reason"
+                }
+            },
+            "cf_department_head": {
+                "type": "custom-fields",
+                "id": "137",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Department Head"
+                }
+            },
+            "cf_department_btop": {
+                "type": "custom-fields",
+                "id": "138",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Department"
+                }
+            },
+            "cf_contact_person_info": {
+                "type": "custom-fields",
+                "id": "342",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Contact Person Information"
+                }
+            },
+            "cf_address_of_supplier": {
+                "type": "custom-fields",
+                "id": "375",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Address of Supplier"
+                }
+            },
+            "cf_supplier_state": {
+                "type": "custom-fields",
+                "id": "376",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier State"
+                }
+            },
+            "cf_supplier_city": {
+                "type": "custom-fields",
+                "id": "377",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier City"
+                }
+            },
+            "cf_supplier_zip": {
+                "type": "custom-fields",
+                "id": "378",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier ZIP"
+                }
+            },
+            "cf_billing_address": {
+                "type": "custom-fields",
+                "id": "380",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Billing Address"
+                }
+            },
+            "cf_bill_to_city": {
+                "type": "custom-fields",
+                "id": "381",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: City"
+                }
+            },
+            "cf_bill_to_state": {
+                "type": "custom-fields",
+                "id": "382",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: State"
+                }
+            },
+            "cf_bill_to_zip": {
+                "type": "custom-fields",
+                "id": "383",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: Zip"
+                }
+            },
+            "cf_shipping_address": {
+                "type": "custom-fields",
+                "id": "385",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Shipping Address"
+                }
+            },
+            "cf_ship_to_city": {
+                "type": "custom-fields",
+                "id": "386",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: City"
+                }
+            },
+            "cf_ship_to_state": {
+                "type": "custom-fields",
+                "id": "387",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: State"
+                }
+            },
+            "cf_ship_to_zip": {
+                "type": "custom-fields",
+                "id": "388",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: Zip"
+                }
+            },
+            "cf_supplier_country": {
+                "type": "custom-fields",
+                "id": "389",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Supplier Country"
+                }
+            },
+            "cf_bill_to_country": {
+                "type": "custom-fields",
+                "id": "390",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Bill To: Country"
+                }
+            },
+            "cf_ship_to_country": {
+                "type": "custom-fields",
+                "id": "391",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Ship To: Country"
+                }
+            },
+            "cf_supplier_company_nam": {
+                "type": "custom-fields",
+                "id": "406",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Supplier Company Name"
+                }
+            },
+            "cf_receiving_company": {
+                "type": "custom-fields",
+                "id": "409",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Receiving Company"
+                }
+            },
+            "cf_bill_to_company": {
+                "type": "custom-fields",
+                "id": "410",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Bill To: Company"
+                }
+            },
+            "cf_description_of_item": {
+                "type": "custom-fields",
+                "id": "413",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Description"
+                }
+            },
+            "cf_project_code": {
+                "type": "custom-fields",
+                "id": "416",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Project Code"
+                }
+            },
+            "cf_payment_terms": {
+                "type": "custom-fields",
+                "id": "420",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Payment Terms"
+                }
+            },
+            "cf_subtotal_n": {
+                "type": "custom-fields",
+                "id": "435",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Subtotal"
+                }
+            },
+            "cf_tax_c": {
+                "type": "custom-fields",
+                "id": "436",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Tax"
+                }
+            },
+            "cf_shipping_n_handling_c": {
+                "type": "custom-fields",
+                "id": "437",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Shipping & Handling"
+                }
+            },
+            "cf_others_c": {
+                "type": "custom-fields",
+                "id": "438",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Others"
+                }
+            },
+            "cf_project_psc": {
+                "type": "custom-fields",
+                "id": "448",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Project"
+                }
+            },
+            "cf_total_ca": {
+                "type": "custom-fields",
+                "id": "459",
+                "attributes": {
+                    "fieldType": "variable",
+                    "label": "Total"
+                }
+            },
+            "cf_quote_number": {
+                "type": "custom-fields",
+                "id": "1202",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Quote/Proposal Number"
+                }
+            },
+            "cf_requisitioner": {
+                "type": "custom-fields",
+                "id": "1477",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Requisitioner"
+                }
+            },
+            "cf_method_of_payment": {
+                "type": "custom-fields",
+                "id": "2082",
+                "attributes": {
+                    "fieldType": "radioButtonList",
+                    "label": "Method of Payment"
+                }
+            },
+            "cf_method_of_payment_no": {
+                "type": "custom-fields",
+                "id": "2083",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Method of Payment Notes"
+                }
+            },
+            "cf_po_amount_used_recei": {
+                "type": "custom-fields",
+                "id": "2091",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "PO Amount Used/Received"
+                }
+            },
+            "cf_amount_remaining_calc": {
+                "type": "custom-fields",
+                "id": "2093",
+                "attributes": {
+                    "fieldType": "variable",
+                    "label": "Amount Remaining"
+                }
+            },
+            "cf_var_poreq": {
+                "type": "custom-fields",
+                "id": "4395",
+                "attributes": {
+                    "fieldType": "picker",
+                    "label": "Vendor Audit Record"
+                }
+            },
+            "cf_other_contact": {
+                "type": "custom-fields",
+                "id": "4687",
+                "attributes": {
+                    "fieldType": "textarea",
+                    "label": "Other Contact Person Information"
+                }
+            },
+            "cf_po_type": {
+                "type": "custom-fields",
+                "id": "4700",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "PO Type"
+                }
+            },
+            "cf_items_btpo": {
+                "type": "custom-fields",
+                "id": "5633",
+                "attributes": {
+                    "fieldType": "table",
+                    "label": "Items"
+                }
+            },
+            "cf_discount_int": {
+                "type": "custom-fields",
+                "id": "5668",
+                "attributes": {
+                    "fieldType": "textfield",
+                    "label": "Price discount, vouchers, and other deductible charges"
+                }
+            }
+        },
+        "links": {
+            "self": "/gateway/v2/records/22982"
+        },
+        "relationships": {
+            "initiator": {
+                "data": {
+                    "id": 188,
+                    "type": "users"
+                }
+            },
+            "project": {
+                "data": {
+                    "id": 40,
+                    "type": "projects"
+                }
+            },
+            "type": {
+                "data": {
+                    "id": 204,
+                    "type": "record-types"
+                }
+            },
+            "status": {
+                "data": {
+                    "id": 43474,
+                    "type": "workflow-steps"
+                }
+            }
+        }
+    }
+}
