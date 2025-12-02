@@ -1,0 +1,3 @@
+{
+    "aql": "SELECT id, name, cf_department_ofbt FROM __main__ where id eq 2620"
+}

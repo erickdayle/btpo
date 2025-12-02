@@ -1,0 +1,41 @@
+{
+    "data": [
+        {
+            "type": "users",
+            "id": "200",
+            "attributes": {
+                "id": 200,
+                "person_id": 227,
+                "username": "testapprover"
+            },
+            "links": {
+                "self": "/gateway/v3/users/200"
+            },
+            "relationships": {
+                "person": {
+                    "data": {
+                        "id": "227",
+                        "type": "people"
+                    }
+                }
+            }
+        }
+    ],
+    "links": {
+        "self": {
+            "href": "/gateway/v3/users/search?page=1"
+        },
+        "first": {
+            "href": "/gateway/v3/users/search?page=1"
+        },
+        "last": {
+            "href": "/gateway/v3/users/search?page=1"
+        }
+    },
+    "meta": {
+        "totalCount": 1,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
+    }
+}

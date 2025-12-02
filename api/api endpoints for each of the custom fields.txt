@@ -1,0 +1,18 @@
+Object query {{endpoint}}/objects/[54 - object id]/search - post request
+cf_department_btop / object id = 37 
+cf_supplier_company_nam / object id = 50 
+cf_receiving_company / object id = 51 
+cf_bill_to_company / object id = 52 
+cf_project_psc / object id = 54 
+
+{{endpoint}}/users/search - post request
+{{endpoint}}/people/227 - get request
+cf_requisitioner / user and person query
+cf_accounting_personnel / user and person query
+cf_received_by / user and person query
+cf_project_manager / user and person query
+
+{{endpoint}}/groups/search - post request
+cf_client / group
+
+

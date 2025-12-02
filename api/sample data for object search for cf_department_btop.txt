@@ -1,0 +1,40 @@
+{
+    "data": [
+        {
+            "type": "object-records",
+            "id": "2620",
+            "attributes": {
+                "id": 2620,
+                "name": "Engineering/Facilities",
+                "cf_department_ofbt": "Engineering/Facilities"
+            },
+            "meta": {
+                "cf_department_ofbt": {
+                    "type": "custom-fields",
+                    "id": "121",
+                    "attributes": {
+                        "fieldType": "textfield",
+                        "label": "Department (Object Field BT)"
+                    }
+                }
+            }
+        }
+    ],
+    "links": {
+        "self": {
+            "href": "/gateway/v3/objects/37/search?page=1"
+        },
+        "first": {
+            "href": "/gateway/v3/objects/37/search?page=1"
+        },
+        "last": {
+            "href": "/gateway/v3/objects/37/search?page=1"
+        }
+    },
+    "meta": {
+        "totalCount": 1,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
+    }
+}

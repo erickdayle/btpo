@@ -1,0 +1,19 @@
+{
+    "data": {
+        "type": "people",
+        "id": "227",
+        "attributes": {
+            "avatar_color": 7,
+            "first_name": "Test Approver1",
+            "last_name": "BT Sandbox",
+            "m_initial": "",
+            "email": "",
+            "avatar": "",
+            "avatar_initials": "TB",
+            "job_title": ""
+        },
+        "links": {
+            "self": "/gateway/v3/people/227"
+        }
+    }
+}

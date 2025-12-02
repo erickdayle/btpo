@@ -1,0 +1,3 @@
+{
+    "aql": "SELECT id, name, cf_project_obj_fld, cf_client, cf_handling_fee_of, cf_project_code, cf_invoice_payment_term  FROM __main__ where id eq 1065"
+}

@@ -1,0 +1,3 @@
+{
+    "aql": "SELECT id, name, cf_company_name_of, cf_address_of_supplier, cf_supplier_state, cf_supplier_city, cf_supplier_zip, cf_supplier_country, cf_var_poreq FROM __main__ where id eq 973"
+}

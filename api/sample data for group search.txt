@@ -1,0 +1,41 @@
+{
+    "data": [
+        {
+            "type": "groups",
+            "id": "196",
+            "attributes": {
+                "name": "PhamaC",
+                "text": "PharmaC",
+                "description": ""
+            },
+            "links": {
+                "self": "/gateway/v3/groups/196"
+            },
+            "relationships": {
+                "site": {
+                    "data": {
+                        "id": 43,
+                        "type": "sites"
+                    }
+                }
+            }
+        }
+    ],
+    "links": {
+        "self": {
+            "href": "/gateway/v3/groups/search?page=1"
+        },
+        "first": {
+            "href": "/gateway/v3/groups/search?page=1"
+        },
+        "last": {
+            "href": "/gateway/v3/groups/search?page=1"
+        }
+    },
+    "meta": {
+        "totalCount": 1,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
+    }
+}

@@ -1,0 +1,76 @@
+{
+    "data": [
+        {
+            "type": "object-records",
+            "id": "1065",
+            "attributes": {
+                "id": 1065,
+                "name": "Daunorubicin",
+                "cf_project_obj_fld": "Daunorubicin",
+                "cf_client": 196,
+                "cf_handling_fee_of": "10.00",
+                "cf_project_code": "DRBCN",
+                "cf_invoice_payment_term": "60 days NET"
+            },
+            "meta": {
+                "cf_project_obj_fld": {
+                    "type": "custom-fields",
+                    "id": "398",
+                    "attributes": {
+                        "fieldType": "textfield",
+                        "label": "Project (Object Field)"
+                    }
+                },
+                "cf_client": {
+                    "type": "custom-fields",
+                    "id": "277",
+                    "attributes": {
+                        "fieldType": "picker",
+                        "label": "Client Permissions"
+                    }
+                },
+                "cf_handling_fee_of": {
+                    "type": "custom-fields",
+                    "id": "399",
+                    "attributes": {
+                        "fieldType": "textfield",
+                        "label": "Handling Fee"
+                    }
+                },
+                "cf_project_code": {
+                    "type": "custom-fields",
+                    "id": "416",
+                    "attributes": {
+                        "fieldType": "textfield",
+                        "label": "Project Code"
+                    }
+                },
+                "cf_invoice_payment_term": {
+                    "type": "custom-fields",
+                    "id": "444",
+                    "attributes": {
+                        "fieldType": "textfield",
+                        "label": "Client/Customer Payment Terms   "
+                    }
+                }
+            }
+        }
+    ],
+    "links": {
+        "self": {
+            "href": "/gateway/v3/objects/54/search?page=1"
+        },
+        "first": {
+            "href": "/gateway/v3/objects/54/search?page=1"
+        },
+        "last": {
+            "href": "/gateway/v3/objects/54/search?page=1"
+        }
+    },
+    "meta": {
+        "totalCount": 1,
+        "pageCount": 1,
+        "currentPage": 1,
+        "perPage": 20
+    }
+}

@@ -1,0 +1,3 @@
+{
+    "aql": "SELECT id, name, cf_receiving_company_of, cf_shipping_address, cf_ship_to_city, cf_ship_to_state, cf_ship_to_zip, cf_ship_to_country, cf_ship_to_contact, cf_ship_to_phone_num FROM __main__ where id eq 966"
+}
