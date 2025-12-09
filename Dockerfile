@@ -2,21 +2,23 @@ FROM node:18-slim
 
 WORKDIR /app
 
-# Copy dependency definitions
+# 1. Install dependencies first (for better caching)
 COPY package*.json ./
-# Install dependencies
 RUN npm install
 
-# Copy application files
+# 2. Copy the new folder structure
+# We copy the specific folders we created during refactoring
+COPY config ./config
+COPY services ./services
+
+# 3. Copy root files
 COPY app.js ./
-COPY purchase_order_processor.js ./
 COPY entrypoint.sh ./  
 
-# Make entrypoint executable
+# 4. Permissions and Entrypoint
 RUN chmod +x ./entrypoint.sh
 
-# Define entrypoint
 ENTRYPOINT ["./entrypoint.sh"]
 
-# Default arguments (overridden by Code Engine)
+# Default arguments
 CMD ["--recordId", "defaultRecordId", "--projectId", "defaultProjectId"]
