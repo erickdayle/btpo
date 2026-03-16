@@ -12,33 +12,30 @@ export default class PurchaseOrderProcessor {
 
     // 1. Get Data
     let recordData = await this.api.getRecordMeta(recordId);
+    if (!recordData) throw new Error("Record not found");
 
-    // 2. Calculations (Internal/External Tables)
+    // 2. Calculations
     const updates = await this._calculateTotals(
       recordId,
-      recordData.attributes
+      recordData.attributes,
     );
-
     if (Object.keys(updates).length > 0) {
       await this.api.updateRecord(recordId, updates);
-      // Refresh data for PDF generation so it has the new totals
-      recordData = await this.api.getRecordMeta(recordId);
+      recordData = await this.api.getRecordMeta(recordId); // Refresh data
     } else {
       console.log("No subtotal updates required.");
     }
 
-    // 3. Enrich Data (Resolve IDs to Names)
+    // 3. Enrich Data
     await this._enrichData(recordData.attributes);
 
-    // 4. Generate & Send Email
+    // 4. Generate PDFs & Send ONE Email
     await this._handleEmail(recordId, recordData);
   }
 
-  // --- CALCULATION LOGIC ---
+  // ... (Calculation Logic is unchanged - keeping it brief) ...
   async _calculateTotals(recordId, attrs) {
     const updates = {};
-
-    // Internal Table
     if (attrs.cf_items_btpo) {
       const res = await this._processTable(
         recordId,
@@ -51,12 +48,10 @@ export default class PurchaseOrderProcessor {
           desc: "cf_item_desc_int",
           uom: "cf_uom_int",
           part: "cf_item_part_num_int",
-        }
+        },
       );
       if (res.shouldUpdate) updates.cf_subtotal_n = res.subtotal;
     }
-
-    // External Table
     if (attrs.cf_items_btpo_api2) {
       const res = await this._processTable(
         recordId,
@@ -69,11 +64,10 @@ export default class PurchaseOrderProcessor {
           desc: "cf_item_desc_ext",
           uom: "cf_uom_ext",
           part: "cf_item_part_num_ext",
-        }
+        },
       );
       if (res.shouldUpdate) updates.cf_subtotal_external = res.subtotal;
     }
-
     return updates;
   }
 
@@ -95,7 +89,6 @@ export default class PurchaseOrderProcessor {
       const qty = parseFloat(v[keys.qty]) || 0;
       const price = parseFloat(v[keys.price]) || 0;
       const currentAmt = parseFloat(v[keys.amount]) || 0;
-
       const newAmt = qty * price;
       subtotal += newAmt;
 
@@ -119,12 +112,11 @@ export default class PurchaseOrderProcessor {
     return { shouldUpdate: true, subtotal: subtotal.toFixed(2) };
   }
 
-  // --- ENRICHMENT LOGIC ---
+  // ... (Enrichment Logic is unchanged) ...
   async _enrichData(attrs) {
     console.log("Resolving Reference Data...");
     const oids = this.config.objects;
-
-    const objectLookups = [
+    const lookups = [
       {
         field: "cf_client",
         method: "searchGroup",
@@ -162,14 +154,13 @@ export default class PurchaseOrderProcessor {
       },
     ];
 
-    for (const item of objectLookups) {
+    for (const item of lookups) {
       if (attrs[item.field]) {
         const query = item.aql(attrs[item.field]);
         const args = item.args ? [...item.args, query] : [query];
         const result = await this.api[item.method](...args);
-        if (result && result.attributes.name) {
+        if (result && result.attributes.name)
           attrs[item.field] = result.attributes.name;
-        }
       }
     }
 
@@ -196,16 +187,24 @@ export default class PurchaseOrderProcessor {
     }
   }
 
-  // --- EMAIL LOGIC ---
+  // --- UPDATED EMAIL LOGIC: SEND ALL ATTACHMENTS ---
   async _handleEmail(recordId, recordData) {
     const attrs = recordData.attributes;
 
     // 1. Resolve Recipients
-    // const recipients = new Set(["BTQAR@biotech.com"]);
-    const recipients = new Set(["carliedayle21@gmail.com"]);
-    // Hardcode your test email as requested previously
-    recipients.add("blagundino@biotech.com");
-    recipients.add("clong@biotech.com");
+    // const recipients = new Set([
+    //   "BTQAR@biotech.com",
+    //   "carliedayle21@gmail.com",
+    // ]);
+
+    const recipients = new Set([
+      "clong@biotech.com",
+      "blagundino@biotech.com",
+      "eloon@biotech.com",
+      "aguzman@biotech.com",
+      "maryg@biotech.com",
+      "gwong@biotech.com",
+    ]);
 
     if (attrs.cf_client_email_address_btpo)
       recipients.add(attrs.cf_client_email_address_btpo.trim());
@@ -216,45 +215,86 @@ export default class PurchaseOrderProcessor {
       if (val) {
         const ids = Array.isArray(val) ? val : [val];
         for (const uid of ids) {
-          const email = await this.api.getUserEmail(uid);
+          const email = await this.api.resolveUserToEmail(uid);
           if (email) recipients.add(email);
         }
       }
     }
 
     const recipientList = Array.from(recipients).filter(
-      (e) => e && e.includes("@")
+      (e) => e && e.includes("@"),
     );
     if (recipientList.length === 0) {
       console.log("No valid recipients for email.");
       return;
     }
 
-    // 2. Generate PDF
-    console.log("Generating PDF...");
+    // 2. Generate ALL PDFs
+    console.log("Generating PDFs...");
     const generator = new InvoiceGenerator();
-    const pdfBuffer = await generator.generate(recordData, "INVOICE");
+    const attachments = [];
+    const pkey = attrs.pkey || recordId;
 
-    // 3. Construct Email Body (Template)
+    // A. Client Invoice (Always generate)
+    const clientInvoiceBuffer = await generator.generate(recordData, "INVOICE");
+    if (clientInvoiceBuffer) {
+      attachments.push({
+        filename: `${pkey}_Invoice.pdf`,
+        content: clientInvoiceBuffer,
+        contentType: "application/pdf",
+      });
+    }
+
+    // B. Internal PO (If internal type or exists)
+    // Checking cf_po_type allows flexibility; defaulting to generating if table exists
+    if (attrs.cf_items_btpo) {
+      // Temporarily force type to "Internal" for generator logic if needed,
+      // or generator handles it by checking table data.
+      // Our generator uses `cf_po_type` to decide layout.
+      // We clone data to safely modify type for generation purposes.
+      const internalData = JSON.parse(JSON.stringify(recordData));
+      internalData.attributes.cf_po_type = "Internal";
+
+      const internalBuffer = await generator.generate(internalData, "PO");
+      if (internalBuffer) {
+        attachments.push({
+          filename: `${pkey}_Internal_PO.pdf`,
+          content: internalBuffer,
+          contentType: "application/pdf",
+        });
+      }
+    }
+
+    // C. External PO (If external table exists)
+    if (attrs.cf_items_btpo_api2) {
+      const externalData = JSON.parse(JSON.stringify(recordData));
+      externalData.attributes.cf_po_type = "External";
+
+      const externalBuffer = await generator.generate(externalData, "PO");
+      if (externalBuffer) {
+        attachments.push({
+          filename: `${pkey}_External_PO.pdf`,
+          content: externalBuffer,
+          contentType: "application/pdf",
+        });
+      }
+    }
+
+    // 3. Construct Email Body
     const clientName = attrs.cf_client || "Client";
-    const invoiceNum = `${attrs.pkey || recordId}-INV`;
     const poNum = attrs.cf_po_number || "N/A";
-
-    // Format Amount
     const rawTotal = parseFloat(attrs.cf_total_w_handlingfe || 0);
     const invoiceAmount = `$${rawTotal.toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;
-
-    // Format Date
     const dueDate = this._formatDate(attrs.cf_due_date_client_invoice);
 
     const emailBody = `Hello ${clientName} Team,
 
 I hope you are doing well!
 
-Attached is a copy of the Invoice # ${invoiceNum}  billed on your PO # ${poNum}.
+Attached are the invoice and purchase order documents for PO # ${poNum}.
 
 Invoice Amount: ${invoiceAmount}
 Due Date: ${dueDate}
@@ -269,13 +309,18 @@ We value you as a customer and appreciate your continued business with us!
 Best regards,
 BioTechnique Team`;
 
-    console.log(`Sending Email to: ${recipientList.join(", ")}`);
+    console.log(
+      `Sending Email with ${
+        attachments.length
+      } attachments to: ${recipientList.join(", ")}`,
+    );
 
+    // Note: We need to update EmailService to accept an array of attachments
     await this.email.sendInvoice(
       recipientList,
-      pdfBuffer,
-      `Invoice ${invoiceNum} - ${clientName}`, // Subject line
-      emailBody
+      attachments,
+      `Invoice Documents ${pkey}`,
+      emailBody,
     );
   }
 
@@ -283,7 +328,6 @@ BioTechnique Team`;
     if (!dateStr) return "N/A";
     const d = new Date(dateStr);
     if (isNaN(d.getTime())) return dateStr;
-    // Format: 09 Jan 2026
     return d.toLocaleDateString("en-GB", {
       day: "2-digit",
       month: "short",

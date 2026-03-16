@@ -21,12 +21,15 @@ const config = {
     port: parseInt(process.env.SMTP_PORT || "587"),
     user: process.env.SMTP_USER,
     pass: process.env.SMTP_PASS,
+
+    // NEW: The address that will appear in the "From" line
+    fromEmail: process.env.SMTP_FROM_EMAIL || process.env.SMTP_USER,
   },
 };
 
-// Simple validation
 if (!config.ace.baseUrl || !config.ace.token) {
-  throw new Error("Missing ACE API Configuration in .env");
+  console.error("CRITICAL: Missing ACE_API_BASE_URL or ACE_API_TOKEN in .env");
+  process.exit(1);
 }
 
 export default config;
