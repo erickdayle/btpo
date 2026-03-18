@@ -277,6 +277,7 @@ Invoice Amount: ${invoiceAmount}
 Due Date: ${dueDate}
 
 E-mail remittance details: BTQAR@biotech.com
+
 Preferred method of payment: ACH or wire transfer
 
 Thank you for choosing BioTechnique LLC!
