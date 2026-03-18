@@ -25,7 +25,24 @@ export default class PurchaseOrderProcessor {
     }
 
     await this._enrichData(recordData.attributes);
-    await this._handleEmail(recordId, recordData);
+
+    // Check Workflow Step before sending email
+    const statusId = recordData.relationships?.status?.data?.id;
+
+    if (statusId) {
+      const stepData = await this.api.getWorkflowStep(statusId);
+      const stepName = stepData?.attributes?.text;
+
+      if (stepName === "Pending Client Payment") {
+        await this._handleEmail(recordId, recordData);
+      } else {
+        console.log(
+          `Workflow step is "${stepName}". Skipping email (requires "Pending Client Payment").`,
+        );
+      }
+    } else {
+      console.log("No workflow status ID found. Skipping email.");
+    }
   }
 
   async _calculateTotals(recordId, attrs) {
@@ -184,12 +201,12 @@ export default class PurchaseOrderProcessor {
     const attrs = recordData.attributes;
 
     const recipients = new Set([
-      // "clong@biotech.com",
-      // "blagundino@biotech.com",
-      // "eloon@biotech.com",
-      // "aguzman@biotech.com",
-      // "maryg@biotech.com",
-      // "gwong@biotech.com",
+      "clong@biotech.com",
+      "blagundino@biotech.com",
+      "eloon@biotech.com",
+      "aguzman@biotech.com",
+      "maryg@biotech.com",
+      "gwong@biotech.com",
     ]);
 
     if (attrs.cf_client_email_address_btpo)
@@ -250,11 +267,12 @@ export default class PurchaseOrderProcessor {
     const emailBody = `Hello ${clientName} Team,
 
 Do not reply to this email. For any questions or concerns, reach out to BTQAR@biotech.com.
-    
+
 I hope you are doing well!
 
 Attached is the consolidated invoice document for PO # ${poNum}.
 
+Please help to do the needful on your end to ensure timely payment.
 Invoice Amount: ${invoiceAmount}
 Due Date: ${dueDate}
 

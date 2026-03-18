@@ -154,6 +154,21 @@ export default class AceApiService {
     }
   }
 
+  async getWorkflowStep(stepId) {
+    console.log(`Fetching workflow step details for ID: ${stepId}`);
+    const response = await fetch(`${this.baseUrl}/workflow-steps/${stepId}`, {
+      headers: this.headers,
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error(`Failed to fetch workflow step ${stepId}:`, errorText);
+      return null;
+    }
+    const result = await response.json();
+    return result.data;
+  }
+
   /**
    * Fetches emails for an array of User IDs in a single query
    * using the /users/search endpoint with a JOIN.
