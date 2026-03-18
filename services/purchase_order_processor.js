@@ -10,30 +10,24 @@ export default class PurchaseOrderProcessor {
   async process(recordId) {
     console.log(`Processing Record: ${recordId}`);
 
-    // 1. Get Data
     let recordData = await this.api.getRecordMeta(recordId);
     if (!recordData) throw new Error("Record not found");
 
-    // 2. Calculations
     const updates = await this._calculateTotals(
       recordId,
       recordData.attributes,
     );
     if (Object.keys(updates).length > 0) {
       await this.api.updateRecord(recordId, updates);
-      recordData = await this.api.getRecordMeta(recordId); // Refresh data
+      recordData = await this.api.getRecordMeta(recordId);
     } else {
       console.log("No subtotal updates required.");
     }
 
-    // 3. Enrich Data
     await this._enrichData(recordData.attributes);
-
-    // 4. Generate PDFs & Send ONE Email
     await this._handleEmail(recordId, recordData);
   }
 
-  // ... (Calculation Logic is unchanged - keeping it brief) ...
   async _calculateTotals(recordId, attrs) {
     const updates = {};
     if (attrs.cf_items_btpo) {
@@ -112,7 +106,6 @@ export default class PurchaseOrderProcessor {
     return { shouldUpdate: true, subtotal: subtotal.toFixed(2) };
   }
 
-  // ... (Enrichment Logic is unchanged) ...
   async _enrichData(attrs) {
     console.log("Resolving Reference Data...");
     const oids = this.config.objects;
@@ -187,23 +180,16 @@ export default class PurchaseOrderProcessor {
     }
   }
 
-  // --- UPDATED EMAIL LOGIC: SEND ALL ATTACHMENTS ---
   async _handleEmail(recordId, recordData) {
     const attrs = recordData.attributes;
 
-    // 1. Resolve Recipients
-    // const recipients = new Set([
-    //   "BTQAR@biotech.com",
-    //   "carliedayle21@gmail.com",
-    // ]);
-
     const recipients = new Set([
-      "clong@biotech.com",
-      "blagundino@biotech.com",
-      "eloon@biotech.com",
-      "aguzman@biotech.com",
-      "maryg@biotech.com",
-      "gwong@biotech.com",
+      // "clong@biotech.com",
+      // "blagundino@biotech.com",
+      // "eloon@biotech.com",
+      // "aguzman@biotech.com",
+      // "maryg@biotech.com",
+      // "gwong@biotech.com",
     ]);
 
     if (attrs.cf_client_email_address_btpo)
@@ -214,87 +200,60 @@ export default class PurchaseOrderProcessor {
       const val = attrs[field];
       if (val) {
         const ids = Array.isArray(val) ? val : [val];
-        for (const uid of ids) {
-          const email = await this.api.resolveUserToEmail(uid);
-          if (email) recipients.add(email);
-        }
+        // Fetch all emails at once using the new bulk method
+        const emails = await this.api.getUsersEmailsBulk(ids);
+        emails.forEach((email) => recipients.add(email));
       }
     }
 
     const recipientList = Array.from(recipients).filter(
       (e) => e && e.includes("@"),
     );
+
+    // Add BTQAR as CC
+    const ccRecipients = ["BTQAR@biotech.com"];
+
     if (recipientList.length === 0) {
       console.log("No valid recipients for email.");
       return;
     }
 
-    // 2. Generate ALL PDFs
-    console.log("Generating PDFs...");
+    console.log("Generating Consolidated Invoice PDF...");
     const generator = new InvoiceGenerator();
     const attachments = [];
     const pkey = attrs.pkey || recordId;
 
-    // A. Client Invoice (Always generate)
     const clientInvoiceBuffer = await generator.generate(recordData, "INVOICE");
     if (clientInvoiceBuffer) {
       attachments.push({
-        filename: `${pkey}_Invoice.pdf`,
+        filename: `${pkey}-INV Invoice.pdf`,
         content: clientInvoiceBuffer,
         contentType: "application/pdf",
       });
     }
 
-    // B. Internal PO (If internal type or exists)
-    // Checking cf_po_type allows flexibility; defaulting to generating if table exists
-    if (attrs.cf_items_btpo) {
-      // Temporarily force type to "Internal" for generator logic if needed,
-      // or generator handles it by checking table data.
-      // Our generator uses `cf_po_type` to decide layout.
-      // We clone data to safely modify type for generation purposes.
-      const internalData = JSON.parse(JSON.stringify(recordData));
-      internalData.attributes.cf_po_type = "Internal";
-
-      const internalBuffer = await generator.generate(internalData, "PO");
-      if (internalBuffer) {
-        attachments.push({
-          filename: `${pkey}_Internal_PO.pdf`,
-          content: internalBuffer,
-          contentType: "application/pdf",
-        });
-      }
-    }
-
-    // C. External PO (If external table exists)
-    if (attrs.cf_items_btpo_api2) {
-      const externalData = JSON.parse(JSON.stringify(recordData));
-      externalData.attributes.cf_po_type = "External";
-
-      const externalBuffer = await generator.generate(externalData, "PO");
-      if (externalBuffer) {
-        attachments.push({
-          filename: `${pkey}_External_PO.pdf`,
-          content: externalBuffer,
-          contentType: "application/pdf",
-        });
-      }
-    }
-
-    // 3. Construct Email Body
     const clientName = attrs.cf_client || "Client";
     const poNum = attrs.cf_po_number || "N/A";
-    const rawTotal = parseFloat(attrs.cf_total_w_handlingfe || 0);
+    const isInternal = attrs.cf_po_type === "Internal";
+    const rawTotal = isInternal
+      ? parseFloat(attrs.cf_total_ca || 0)
+      : parseFloat(attrs.cf_total_w_handlingfe || 0);
+
     const invoiceAmount = `$${rawTotal.toLocaleString("en-US", {
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
     })}`;
     const dueDate = this._formatDate(attrs.cf_due_date_client_invoice);
 
+    const emailSubject = `Invoice ${pkey}-INV | ${clientName} | Due for payment on ${dueDate}`;
+
     const emailBody = `Hello ${clientName} Team,
 
+Do not reply to this email. For any questions or concerns, reach out to BTQAR@biotech.com.
+    
 I hope you are doing well!
 
-Attached are the invoice and purchase order documents for PO # ${poNum}.
+Attached is the consolidated invoice document for PO # ${poNum}.
 
 Invoice Amount: ${invoiceAmount}
 Due Date: ${dueDate}
@@ -310,16 +269,14 @@ Best regards,
 BioTechnique Team`;
 
     console.log(
-      `Sending Email with ${
-        attachments.length
-      } attachments to: ${recipientList.join(", ")}`,
+      `Sending Email to: ${recipientList.join(", ")} | CC: ${ccRecipients.join(", ")}`,
     );
 
-    // Note: We need to update EmailService to accept an array of attachments
     await this.email.sendInvoice(
       recipientList,
+      ccRecipients,
       attachments,
-      `Invoice Documents ${pkey}`,
+      emailSubject,
       emailBody,
     );
   }

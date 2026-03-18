@@ -30,7 +30,7 @@ export default class AceApiService {
     });
     if (!res.ok)
       throw new Error(
-        `Failed to update record ${recordId}: ${await res.text()}`
+        `Failed to update record ${recordId}: ${await res.text()}`,
       );
   }
 
@@ -45,11 +45,11 @@ export default class AceApiService {
         method: "PATCH",
         headers: this.headers,
         body: JSON.stringify({ data: payloadData }),
-      }
+      },
     );
     if (!res.ok)
       throw new Error(
-        `Failed to update table ${tableFieldId}: ${await res.text()}`
+        `Failed to update table ${tableFieldId}: ${await res.text()}`,
       );
   }
 
@@ -63,7 +63,7 @@ export default class AceApiService {
     return this._postSearch(`/objects/${objectId}/search`, aql);
   }
 
-  // --- USER & PERSON LOGIC (The Fix) ---
+  // --- USER & PERSON LOGIC ---
 
   /**
    * Resolves a User ID to a human readable name by chaining User -> Person queries.
@@ -108,34 +108,84 @@ export default class AceApiService {
   }
 
   /**
-   * Fetches the email for a user (via Person record if needed).
+   * Fetches the email for a user, handling the User -> Person relationship
    */
   async getUserEmail(userId) {
     if (!userId) return null;
+
     try {
+      // Step 1: Assume the ID is a User ID. Fetch the User to get the person_id.
       const userRes = await fetch(`${this.baseUrl}/users/${userId}`, {
         headers: this.headers,
       });
-      if (!userRes.ok) return null;
-      const userJson = await userRes.json();
 
-      // Sometimes email is on User, sometimes on Person. Check Person first for accuracy.
-      const personId = userJson.data?.attributes?.person_id;
-      if (personId) {
-        const personRes = await fetch(`${this.baseUrl}/people/${personId}`, {
-          headers: this.headers,
-        });
-        if (personRes.ok) {
-          const personJson = await personRes.json();
-          if (personJson.data?.attributes?.email) {
-            return personJson.data.attributes.email;
+      if (userRes.ok) {
+        const userJson = await userRes.json();
+
+        // Sometimes email is on User, sometimes on Person. Check Person first for accuracy.
+        const personId = userJson.data?.attributes?.person_id;
+        if (personId) {
+          const personRes = await fetch(`${this.baseUrl}/people/${personId}`, {
+            headers: this.headers,
+          });
+          if (personRes.ok) {
+            const personJson = await personRes.json();
+            if (personJson.data?.attributes?.email) {
+              return personJson.data.attributes.email;
+            }
           }
         }
       }
-      // Fallback to User email if Person failed or didn't have one
-      return userJson.data?.attributes?.email || null;
-    } catch (e) {
+
+      // Step 2: Fallback. If the above didn't return an email (maybe the ID was ALREADY a person ID).
+      const directPersonRes = await fetch(`${this.baseUrl}/people/${userId}`, {
+        headers: this.headers,
+      });
+
+      if (directPersonRes.ok) {
+        const directPersonJson = await directPersonRes.json();
+        return directPersonJson.data?.attributes?.email || null;
+      }
+
       return null;
+    } catch (e) {
+      console.error(`Failed to fetch email for ID ${userId}:`, e.message);
+      return null;
+    }
+  }
+
+  /**
+   * Fetches emails for an array of User IDs in a single query
+   * using the /users/search endpoint with a JOIN.
+   */
+  async getUsersEmailsBulk(userIds) {
+    if (!userIds || !Array.isArray(userIds) || userIds.length === 0) return [];
+
+    const idsString = userIds.join(", ");
+    const aql = `select id, person_id, username, person.email from __main__ JOIN person where id in (${idsString})`;
+
+    try {
+      const res = await fetch(`${this.baseUrl}/users/search`, {
+        method: "POST",
+        headers: this.headers,
+        body: JSON.stringify({ aql }),
+      });
+
+      if (!res.ok) return [];
+
+      const json = await res.json();
+      if (!json.data) return [];
+
+      // Map through the response to extract just the emails
+      return json.data
+        .map((record) => record.attributes?.email)
+        .filter((email) => email); // Filter out nulls/undefined
+    } catch (e) {
+      console.error(
+        `Failed to fetch bulk emails for users [${idsString}]:`,
+        e.message,
+      );
+      return [];
     }
   }
 
