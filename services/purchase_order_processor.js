@@ -212,17 +212,21 @@ export default class PurchaseOrderProcessor {
       // "gwong@biotech.com",
     ]);
 
-    if (attrs.cf_client_email_address_btpo)
-      recipients.add(attrs.cf_client_email_address_btpo.trim());
+    if (attrs.cf_client_email_address_btpo) {
+      attrs.cf_client_email_address_btpo
+        .split(/[,;:]/)
+        .map((e) => e.trim().toLowerCase())
+        .filter((e) => e.includes("@"))
+        .forEach((e) => recipients.add(e));
+    }
 
     const userPickers = ["cf_client_qa_approvers", "cf_bt_users"];
     for (const field of userPickers) {
       const val = attrs[field];
       if (val) {
         const ids = Array.isArray(val) ? val : [val];
-        // Fetch all emails at once using the new bulk method
         const emails = await this.api.getUsersEmailsBulk(ids);
-        emails.forEach((email) => recipients.add(email));
+        emails.forEach((email) => recipients.add(email.trim().toLowerCase()));
       }
     }
 
