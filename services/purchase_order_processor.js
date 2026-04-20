@@ -34,13 +34,13 @@ export default class PurchaseOrderProcessor {
       const stepName = stepData?.attributes?.text;
 
       if (
-        stepName === "Pending Customer Payment" ||
-        stepName === "Resend Client Invoice"
+        stepName === "Pending Client Payment" ||
+        stepName === "Pending Customer Payment"
       ) {
         await this._handleEmail(recordId, recordData, stepName);
       } else {
         console.log(
-          `Workflow step is "${stepName}". Skipping email (requires "Pending Customer Payment" or "Resend Client Invoice").`,
+          `Workflow step is "${stepName}". Skipping email (requires "Pending Client Payment" or "Pending Customer Payment").`,
         );
       }
     } else {
@@ -265,9 +265,11 @@ export default class PurchaseOrderProcessor {
     })}`;
     const dueDate = this._formatDate(attrs.cf_due_date_client_invoice);
 
-    const emailSubject = `Invoice ${pkey}-INV | ${clientName} | Due for payment on ${dueDate}`;
+    const isRevised = stepName === "Pending Customer Payment";
 
-    const isRevised = stepName === "Resend Client Invoice";
+    const emailSubject = isRevised
+      ? `REVISED: Invoice ${pkey}-INV | ${clientName} | Due for payment on ${dueDate}`
+      : `Invoice ${pkey}-INV | ${clientName} | Due for payment on ${dueDate}`;
 
     const emailBody = isRevised
       ? `Hello ${clientName} Team,
@@ -276,17 +278,23 @@ Do not reply to this email. For any questions or concerns, reach out to BTQAR@bi
 
 I hope you are doing well!
 
+
 Attached is the revised version of the consolidated invoice for ${poNum}. Please note that this document supersedes the previous invoice sent.
 
 Please help to do the needful on your end to ensure timely payment using this updated copy.
+
 Invoice Amount: ${invoiceAmount}
+
 Due Date: ${dueDate}
+
 
 E-mail remittance details: BTQAR@biotech.com
 
 Preferred method of payment: ACH or wire transfer
 
+
 Thank you for choosing BioTechnique LLC!
+
 We value you as a customer and appreciate your continued business with us!
 
 
@@ -302,7 +310,9 @@ I hope you are doing well!
 Attached is the consolidated invoice document for PO # ${poNum}.
 
 Please help to do the needful on your end to ensure timely payment.
+
 Invoice Amount: ${invoiceAmount}
+
 Due Date: ${dueDate}
 
 E-mail remittance details: BTQAR@biotech.com
