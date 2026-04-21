@@ -376,7 +376,7 @@ export default class InvoiceGenerator {
 
         // Universal extraction targeting both Internal and External keys
         const desc = v.cf_item_desc_int || v.cf_item_desc_ext || "";
-        const extPart = v.cf_item_part_num_ext || "";
+        const extPart = v.cf_item_part_no_ext || "";
         const qty = v.cf_order_qty_int || v.cf_order_qty_ext || "0";
         const uom = v.cf_uom_int || v.cf_uom_ext || "";
         const price =

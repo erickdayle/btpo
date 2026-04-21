@@ -77,7 +77,7 @@ export default class PurchaseOrderProcessor {
           amount: "cf_dollar_amount_external",
           desc: "cf_item_desc_ext",
           uom: "cf_uom_ext",
-          part: "cf_item_part_num_ext",
+          part: "cf_item_part_no_ext",
         },
       );
       if (res.shouldUpdate) updates.cf_subtotal_external = res.subtotal;
