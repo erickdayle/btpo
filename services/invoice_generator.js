@@ -160,7 +160,7 @@ export default class InvoiceGenerator {
           ship: "cf_shipping_n_handling_c",
           other: "cf_others_c",
           disc: "cf_discount_int",
-          tariffs: "cf_tariffs", // Ensure this exists in your API
+          tariffs: "cf_tariffs_ext",
           hand: "cf_handling_fee_of",
           total: "cf_total_ca",
         }
@@ -170,7 +170,7 @@ export default class InvoiceGenerator {
           ship: "cf_shipping_n_handling_external",
           other: "cf_others_external",
           disc: "cf_discount_ext",
-          tariffs: "cf_tariffs", // Ensure this exists in your API
+          tariffs: "cf_tariffs_ext",
           hand: "cf_additional_handling_ext",
           total: "cf_total_w_handlingfe",
         };
